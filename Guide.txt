@@ -79,3 +79,59 @@ setuptools.setup(
         "tqdm"
     ]
 )
+
+github\workflows\cicd.yml
+7. In the root directory, you need to create certain folder. This folder will be responsible to pushing your changes to the pypi
+library/packages. So when you update the package, this folder will be respondible to pushing those updated changes.
+
+- github\workflows\cicd.yml
+
+8. Copy and paste this into the newly created cicd.yml file
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Upload Python Package
+
+on:
+  push:
+    branches:
+    - main
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+      - name: Build package
+        run: python -m build
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
+
+9. Now you need to register into https://pypi.org/account/register/
+If you already have an account, just log in. We need this account because we need a token for our PYPI_API 
+user: __token__ in the  cicd.yml file
+Under account setting in your pypi, create a token (ADD TOEKN)
+
+- Token name: AK_Repo_pypi (This is your repo/project name)
+
+10. Now that you have generated a token, copy it and go to github - settings - Secrets - Actions - New repo secret
+Name: PYPI_API_TOKEN
+
+And paste your api token on the value box
+
