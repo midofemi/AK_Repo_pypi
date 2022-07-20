@@ -80,11 +80,10 @@ setuptools.setup(
     ]
 )
 
-github\workflows\cicd.yml
 7. In the root directory, you need to create certain folder. This folder will be responsible to pushing your changes to the pypi
 library/packages. So when you update the package, this folder will be respondible to pushing those updated changes.
 
-- github\workflows\cicd.yml
+- .github\workflows\cicd.yml (Make sure your folder start with a dot (.) then followed by th folder name and sub folder)
 
 8. Copy and paste this into the newly created cicd.yml file
 
