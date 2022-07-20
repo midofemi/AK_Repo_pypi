@@ -1,0 +1,81 @@
+This is just a continuation from the guide from AK_Repo
+We want to package our project from AK_Repo
+https://packaging.python.org/en/latest/tutorials/packaging-projects/
+The above link is the intruction we will follow
+
+STEPS:
+1. Create the following file structure locally:
+packaging_tutorial/
+└── src/
+    └── example_package_YOUR_USERNAME_HERE/
+        ├── __init__.py
+        └── example.py
+So we need to have a src folder just like kedro. So let make a mkdir called src
+- mkdir -p src/AK_Repo_pypi
+- touch src/AK_Repo_pypi/__init__.py
+- touch src/AK_Repo_pypi/perceptron.py
+
+Here __init__ tells us that our package perceptron on the folder AK_Repo_pypi. That the purpose of creating a file called __init__
+
+2. Now you can copy and paste the code we have for model.py from the other repo into the newly created perceptron.py
+
+3. Creating pyproject.toml
+- touch pyproject.toml
+This will create a toml file for you (See docs for it use)
+
+4. Copy and paste this into the newly created toml file
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+5. Now let Creating the package files as stated by the docs. 
+packaging_tutorial/
+├── LICENSE
+├── pyproject.toml
+|-- setup.py
+├── README.md
+├── src/
+│   └── example_package_YOUR_USERNAME_HERE/
+│       ├── __init__.py
+│       └── example.py
+└── tests/
+
+- touch setup.py
+
+6. Copy and paste this into the newly created setup.py
+import setuptools
+
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
+PROJECT_NAME = "AK_Repo_pypi"
+USER_NAME = "midofemi"
+
+setuptools.setup(
+    name=f"{PROJECT_NAME}-{USER_NAME}",
+    version="0.0.2",
+    author=USER_NAME,
+    author_email="midofemi@yahoo.com",
+    description="its an implimentation of Perceptron",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url=f"https://github.com/{USER_NAME}/{PROJECT_NAME}",
+    project_urls={
+        "Bug Tracker": f"https://github.com/{USER_NAME}/{PROJECT_NAME}/issues",
+    },
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src"),
+    python_requires=">=3.7",
+    install_requires=[
+        "numpy",
+        "tqdm"
+    ]
+)
