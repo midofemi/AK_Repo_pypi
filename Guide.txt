@@ -15,7 +15,7 @@ So we need to have a src folder just like kedro. So let make a mkdir called src
 - touch src/AK_Repo_pypi/__init__.py
 - touch src/AK_Repo_pypi/perceptron.py
 
-Here __init__ tells us that our package perceptron on the folder AK_Repo_pypi. That the purpose of creating a file called __init__
+Here __init__ tells us that our package perceptron is on the folder AK_Repo_pypi. That the purpose of creating a file called __init__
 
 2. Now you can copy and paste the code we have for model.py from the other repo into the newly created perceptron.py
 
@@ -133,4 +133,18 @@ Under account setting in your pypi, create a token (ADD TOEKN)
 Name: PYPI_API_TOKEN
 
 And paste your api token on the value box
+
+Now you good to go. Just commit your changes and go to github
+
+11. Go to action. If everything was done right. You'll be able to see that your package was deployed successfully
+
+12. If you go to pypi.org. You'll see your new package was registered
+
+13. Now you can open a new project, pip install AK-Repo-pypi-midofemi and use/test your new package.
+- from AK_Repo_pypi.perceptron import Perceptron
+
+
+NOTE: Very Important. Make sure you update version number on setup.py when you push changes or else it will throw an error
+
+THAT IT !!!!!!!!!!!!!!!!!!!!
 
